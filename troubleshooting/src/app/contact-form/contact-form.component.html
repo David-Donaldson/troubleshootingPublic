@@ -1,0 +1,115 @@
+<div class="container">
+
+  <div class="modal-header rounded-0">
+    <h1 class="fw-bold col" id="ArchivesModalLabel">CallBack Form</h1>
+    <button type="button" (click)="closemodal()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="row">
+
+          <p class="card-title"><b><i>Please Fill out this form to submit a ticket and someone will contact
+                you.</i></b></p>
+          <br />
+          <div class="form-group col-6">
+            <label for="AccountNo" class="form-label fw-bold col">Account #: </label>
+            <input type="text" name="AccountNo" [ngClass]="{ 'is-invalid': submitted && f.AccountNo.errors }"
+              formControlName="AccountNo" class="form-control" />
+          </div>
+          <br />
+
+          <div class="form-group col-6">
+            <label for="CustomerName" class="form-label fw-bold col"><span class="mandatoryFields">*</span>Customer
+              Name: </label>
+            <input type="text" name="CustomerName" [ngClass]="{ 'is-invalid': submitted && f.CustomerName.errors }"
+              formControlName="CustomerName" class="form-control" />
+            <div *ngIf="f.CustomerName.errors" class="invalid-feedback">
+              <div *ngIf="f.CustomerName.errors.required">Customer Name is Required</div>
+            </div>
+          </div>
+          <br />
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6 mt-3">
+            <label for="ContactNumber" class="form-label fw-bold col"><span
+                class="mandatoryFields">*</span>Contact Number </label>
+            <input type="text" name="ContactNumber"
+              [ngClass]="{ 'is-invalid': submitted && f.ContactNumber.errors }"
+              formControlName="ContactNumber" class="form-control" />
+            <div *ngIf="f.ContactNumber.errors" class="invalid-feedback">
+              <div *ngIf="f.ContactNumber.errors.required">Contact Number is Required</div>
+              <div *ngIf="f.ContactNumber.errors.pattern">Must be a valid telephone number</div>
+              <div *ngIf="f.ContactNumber.errors.minlength">Minimum of 11 digits is Required</div>
+              <div *ngIf="f.ContactNumber.errors.maxlength">Maximum of 11 digits is Required</div>
+            </div>
+          </div>
+          <!--
+              <div class="form-group col-4 mt-3">
+                <label for="secondaryContactNumber" class="form-label fw-bold col">Phone 2: </label>
+                <input type="text" name="secondaryContactNumber"
+                  [ngClass]="{ 'is-invalid': submitted && f.secondaryContactNumber.errors }"
+                  formControlName="secondaryContactNumber" class="form-control" />
+                <div *ngIf="f.secondaryContactNumber.errors" class="invalid-feedback">
+                  <div *ngIf="f.secondaryContactNumber.errors.pattern">Must be a valid telephone number</div>
+                  <div *ngIf="f.secondaryContactNumber.errors.minlength">Minimum of 11 digits is Required</div>
+                  <div *ngIf="f.secondaryContactNumber.errors.maxlength">Maximum of 11 digits is Required</div>
+                </div>
+              </div>
+  -->
+          <div class="form-group col-6 mt-3">
+            <label for="EmailAddress" class="form-label fw-bold col"><span class="mandatoryFields">*</span>Email
+              Address: </label>
+            <input type="text" name="EmailAddress" [ngClass]="{ 'is-invalid': submitted && f.EmailAddress.errors }"
+              formControlName="EmailAddress" class="form-control" />
+            <div *ngIf="f.EmailAddress.errors" class="invalid-feedback">
+              <div *ngIf="f.EmailAddress.errors.required">Email is Required</div>
+              <div *ngIf="f.EmailAddress.errors.email">Must be a valid email address</div>
+            </div>
+          </div>
+          <br />
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-4 mt-3">
+            <label for="ServiceType" class="form-label fw-bold col">Service Type: </label>
+            <input type="text" formControlName="ServiceType" [attr.disabled]="true" [attr.readOnly]="true"
+              formControlName="ServiceType" class="form-control" />
+          </div>
+
+          <div class="form-group col-8 mt-3">
+            <label for="IssueSelected" class="form-label fw-bold col"><span class="mandatoryFields">*</span>Issue
+              Selected: </label>
+            <select name="IssueSelected" formControlName="IssueSelected" (change)="changeServiceType()"
+              class="form-select">
+              <option *ngFor="let single of TroubleshootingTreeSearch;" [selected]="single.issue == issueSelected">
+                {{single.issue}}</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-3">
+            <label class="form-label fw-bold col" for="AdditionalInfo">Additional Information: </label><br />
+            <textarea class="form-control" formControlName="AdditionalInfo"></textarea>
+          </div>
+          <div class="col-4"></div>
+
+          <div class="btn-group mt-3" role="group" aria-label="Ok Button Group">
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+          </div>
+          <div class="col-6"></div>
+
+          <input type="text" ngbAutofocus style="display:none" />
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+
+</div>

@@ -1,0 +1,29 @@
+<mat-toolbar class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+  <mat-toolbar-row style="padding: 0 5px;">
+    <button class="search-icon custom_button" mat-icon-button disabled>
+      <mat-icon>search</mat-icon>
+    </button>
+    <input class="search-control" id="searchbar" type="text" [(ngModel)]="searchText" placeholder="Search"
+      (keyup)="onkeyup($event)" #searchbar>
+    <button class="custom_button" mat-button mat-icon-button (click)="searchClose()">
+      <mat-icon ngbTooltip="Close" placement="bottom">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div style="margin-top: 4%;" *ngIf="toggleSearch"
+  class="container-lg py-5 rounded-bottom  animate__animated animate__fadeIn">
+  <h3 class="col pt-1 border-bottom">Search <b style="color:#1B9BE4">Results</b></h3>
+  <ul *ngFor="let single of TroubleshootingTreeSearch | filter: searchText" class="list-groupd-flex">
+    <li *ngIf="searchText != ''" class="list-group-item mb-2 col  borderless" (click)="showSearchSelect(single)">
+      {{single.issue}}
+    </li>
+  </ul>
+  <ul class="list-groupd-flex"
+    *ngIf="(TroubleshootingTreeSearch | filter: searchText).length === 0 || searchText == ''">
+    <li class="list-group-item mb-2 col  borderless">
+      Nothing Found
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,838 @@
+<div class="container py-4" id="scroller_top"></div>
+
+<div class="container py-4" id="scroller">
+  <div class="row" [ngClass]="{ 'div-row-Media-Style': divOptionsMediaStyle }">
+    <div
+      class="col customdivOptions {{ optionTV }}"
+      [ngClass]="{ 'div-Options-Media-Style': divOptionsMediaStyle }"
+    >
+      <div
+        class="p-1 border overflow-hidden rounded-2 animate__animated animate__pulse"
+        style="animation-delay: 0.1s"
+        id="tv"
+        #tv
+        (click)="selectTroubleshootingOption($event, tv.id)"
+      >
+        <div class="d-flex flex-row mt-1">
+          <div class="p-2">
+            <i class="bi bi-tv-fill" style="font-size: 2em"></i>
+          </div>
+          <div class="p-2">
+            <h2 class="fw-bold mb-0">TV</h2>
+            <p>Tv/Video Related Issues</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col customdivOptions {{ optionInternet }}"
+      [ngClass]="{ 'div-Options-Media-Style': divOptionsMediaStyle }"
+    >
+      <div
+        class="p-1 border overflow-hidden rounded-2 animate__animated animate__pulse"
+        style="animation-delay: 0.3s"
+        id="internet"
+        #internet
+        (click)="selectTroubleshootingOption($event, internet.id)"
+      >
+        <div class="d-flex flex-row mt-1">
+          <div class="p-2">
+            <i class="bi bi-router-fill" style="font-size: 2em"></i>
+          </div>
+          <div class="p-2">
+            <h2 class="fw-bold mb-0">Internet</h2>
+            <p>Internet Related Issues</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col customdivOptions {{ optionPhone }}"
+      [ngClass]="{ 'div-Options-Media-Style': divOptionsMediaStyle }"
+    >
+      <div
+        class="p-1 border overflow-hidden rounded-2 animate__animated animate__pulse"
+        style="animation-delay: 0.5s"
+        id="phone"
+        #phone
+        (click)="selectTroubleshootingOption($event, phone.id)"
+      >
+        <div class="d-flex flex-row mt-1">
+          <div class="p-2">
+            <i class="bi bi-telephone-fill" style="font-size: 2em"></i>
+          </div>
+          <div class="p-2">
+            <h2 class="fw-bold mb-0">Home Phone</h2>
+            <p>Phone Related Issues</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col customdivOptions {{ optionMobile }}"
+      [ngClass]="{ 'div-Options-Media-Style': divOptionsMediaStyle }"
+    >
+      <div
+        class="p-1 border overflow-hidden rounded-2 animate__animated animate__pulse"
+        style="animation-delay: 0.7s"
+        id="mobile"
+        #mobile
+        (click)="selectTroubleshootingOption($event, mobile.id)"
+      >
+        <div class="d-flex flex-row mt-1">
+          <div class="p-2">
+            <i class="bi bi-phone-fill" style="font-size: 2em"></i>
+          </div>
+          <div class="p-2">
+            <h2 class="fw-bold mb-0">Mobile</h2>
+            <p>Mobile Related Issues</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container>
+    <div [@slideInOut]="animationStateTechnology" class="container pt-5">
+      <div class="row">
+        <div class="col-10">
+          <div class="row">
+            <div class="col-12 mb-2" style="padding-right: 0px">
+              <h1 class="col border-bottom">
+                <b style="color: #1b9be4">Troubleshoot </b
+                >{{ troubleshootingRoot | titlecase }}
+              </h1>
+            </div>
+          </div>
+
+          <ul
+            id="scrollTo"
+            class="list-groupd-flex animate__animated animate__fadeIn"
+          >
+            <li
+              class="list-group-item mb-2 col borderless"
+              *ngFor="let single of troubleshootingList"
+              [ngClass]="{ active: selectedItem == single }"
+              (click)="branchOptions($event, single)"
+            >
+              {{ single }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-2">
+          <div class="col-2 clear-icon" style="padding-left: 0px">
+            <mat-icon (click)="clearOption1()">highlight_off</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div
+    *ngIf="
+      troubleshootingOption != 'General Data Tips' &&
+      troubleshootingOption != 'Mobile Data Not Working' &&
+      troubleshootingOption != 'Activating Roaming' &&
+      troubleshootingOption != 'Unable to Receive Calls - Mobile' &&
+      troubleshootingOption != 'Credit Not Showing Up' &&
+      troubleshootingOption != 'General Mobile Tips' &&
+      troubleshootingOption != ''
+    "
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12" style="padding-right: 0px">
+            <h1 class="col pb-2 border-bottom">{{ troubleshootingOption }}</h1>
+          </div>
+        </div>
+
+        <!--<div class="row row-cols-1">
+          <h1 class="col pb-2">Symptom</h1>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li class="list-group-item mb-3 col symptom_cause" style="animation-delay: 2s;">
+              Add Symptoms Here
+            </li>
+          </ul>
+        </div>
+
+        <div class="row row-cols-1 ">
+          <h1 class="col pb-2">Cause</h1>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li class="list-group-item mb-3 col symptom_cause" style="animation-delay: 2s;">
+              Add Causes Here
+            </li>
+          </ul>
+        </div>-->
+
+        <div class="row row-cols-1">
+          <!--<h1 class="col pb-2">Resolution</h1>-->
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <br />
+            <li
+              class="list-group-item mb-3 col borderless resolution_list"
+              style="animation-delay: 0.5s"
+              *ngFor="let single of troubleshootingSteps; let i = index"
+            >
+              <span>{{ single }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="py-3" style="justify-content: center; display: flex">
+          <div>
+            <i
+              matTooltip="Issue Resolved"
+              matTooltipPosition="right"
+              class="bi bi-hand-thumbs-up-fill text-success"
+              (click)="finalResponse(true)"
+              style="padding: 2rem"
+            ></i>
+
+            <i
+              matTooltip="Issue Not Resolved"
+              matTooltipPosition="left"
+              class="bi bi-hand-thumbs-down-fill text-danger"
+              (click)="finalResponse(false)"
+              style="padding: 2rem"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'General Data Tips'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <h1 class="col pb-2 border-bottom">{{ troubleshootingOption }}</h1>
+        <br />
+        <div class="row row-cols-1">
+          <br />
+          <h1 class="col pb-2">5GHz vs. 2.5 GHz Wireless Settings</h1>
+          <p class="col" style="font-size: 18px">
+            Flow fibre modems/ gateway devices supports two (2) wireless
+            frequencies or networks, 2.5GHz and 5GHz dual band wireless
+            settings.
+          </p>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-1 col symptom_cause"
+              style="animation-delay: 2s"
+            >
+              5GHz offers more throughput [faster speeds] with less range, ideal
+              for gaming, streaming
+            </li>
+            <li
+              class="list-group-item mb-1 col symptom_cause"
+              style="animation-delay: 2s"
+            >
+              2.5 GHz offers more range with less throughput ideal for browsing,
+              streaming SD content etc.
+            </li>
+          </ul>
+        </div>
+
+        <div class="row row-cols-1">
+          <h1 class="col pb-2">
+            Accessing the Best Possible Wi-Fi Connectivity
+          </h1>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col borderless resolution_list"
+              style="animation-delay: 0.5s"
+              *ngFor="let single of troubleshootingSteps[0][0]; let i = index"
+            >
+              <span>{{ single }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row row-cols-1">
+          <h1 class="col pb-2">
+            Wi-fi Range Extenders | Boosters | Mesh Networks
+          </h1>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item col borderless resolution_list"
+              style="animation-delay: 0.5s"
+              *ngFor="let single of troubleshootingSteps[0][1]; let i = index"
+            >
+              <span>{{ single }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'General Mobile Tips'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <h1 class="col pb-2 border-bottom">{{ troubleshootingOption }}</h1>
+        <br />
+        <div class="row row-cols-1">
+          <h1 class="col pb-2">
+            Restarting your device will clear most common issues. To restart:
+          </h1>
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Turn on airplane mode for 15 seconds, then turn it back off.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Perform a device restart.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Remove SIM card from the device, wipe it with a dry cloth or
+              pencil eraser, then reinsert and try again.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to ensure you have Flow SIM card.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'Mobile Data Not Working'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12" style="padding-right: 0px">
+            <h1 class="col pb-2 border-bottom fw-bold">
+              {{ troubleshootingOption }}
+            </h1>
+          </div>
+        </div>
+
+        <br />
+        <div class="row row-cols-1">
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Verify that you are subscribed to the service you are trying to
+              use (i.e. roaming plan, data plan)
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Make sure the mobile data feature on the device is turned on
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to make sure Flow supports the action being requested
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check Network Settings:
+              <ul class="list-group-item mb-3 col" style="padding-left: 4em">
+                <li>
+                  <b>Android</b> > network connections > mobile networks >
+                  network mode > options menu, change from LTE to 2G and back to
+                  LTE
+                </li>
+                <li>
+                  <b>Android</b> > network connections > mobile networks >
+                  network operators > manual scan > select name of network
+                </li>
+                <li>
+                  <b>iPhone</b> > settings > mobile data > network selection >
+                  select name of the network that you are on and connect from
+                  there `Check Message Center Number
+                </li>
+                <li>
+                  <b>Android</b> > Messages > message settings > text messages >
+                  message center number, should be +18768141109.
+                </li>
+                <li>
+                  <b>iPhone</b> > for 2G or 3G phone call customer care for
+                  assistance, if not go to store.
+                </li>
+              </ul>
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check your credit to make sure you have enough top up to make
+              calls/ access mobile data
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              If the issue persists, turn on airplane mode for 15 seconds, then
+              turn it back off.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Perform a device restart.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Remove SIM card from the device, wipe it with a dry cloth or
+              pencil eraser, then reinsert and try again.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to ensure you have Flow SIM card.
+            </li>
+          </ul>
+        </div>
+
+        <div class="py-3">
+          <div class="py-3" style="justify-content: center; display: flex">
+            <div>
+              <i
+                matTooltip="Issue Resolved"
+                matTooltipPosition="right"
+                class="bi bi-hand-thumbs-up-fill text-success"
+                (click)="finalResponse(true)"
+                style="padding: 2rem"
+              ></i>
+
+              <i
+                matTooltip="Issue Not Resolved"
+                matTooltipPosition="left"
+                class="bi bi-hand-thumbs-down-fill text-danger"
+                (click)="finalResponse(false)"
+                style="padding: 2rem"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'Activating Roaming'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12" style="padding-right: 0px">
+            <h1 class="col pb-2 border-bottom fw-bold">
+              {{ troubleshootingOption }}
+            </h1>
+          </div>
+        </div>
+
+        <br />
+        <div class="row row-cols-1">
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Verify that you are subscribed to the service you are trying to
+              use (i.e. roaming plan, data plan)
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to make sure Flow supports the network or action desired
+              (i.e. voice)
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Verify if you can use voice over an LTE network
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check your credit to make sure you have enough top up to make a
+              call
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Dial the following codes to check your status:
+              <ul class="list-group-item mb-3 col" style="padding-left: 4em">
+                <li>*134*8# for Travel Pass Combo</li>
+                <li>*134*7# for Travel Pass 250 MB</li>
+                <li>*134*6# for Travel Pass 500 MB</li>
+                <li>Prepaid: *146*0# for balance</li>
+              </ul>
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check Roaming Settings:
+              <ul class="list-group-item mb-3 col" style="padding-left: 4em">
+                <li>
+                  <b>Android</b> > mobile network or network connections >
+                  network operators > search network based on company (T-Mobile
+                  or AT&T) and connect
+                </li>
+                <li>
+                  <b>iPhone</b> > settings > cellular / mobile network > network
+                  selection > list of networks will appear to choose from >
+                  search and connect
+                </li>
+              </ul>
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              If the issue persists, turn on airplane mode for 15 seconds, then
+              turn it back off.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Remove SIM card from the device, wipe it with a dry cloth or
+              pencil eraser, then reinsert and try again.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to ensure you have Flow SIM card.
+            </li>
+          </ul>
+        </div>
+
+        <div class="py-3">
+          <div class="py-3" style="justify-content: center; display: flex">
+            <div>
+              <i
+                matTooltip="Issue Resolved"
+                matTooltipPosition="right"
+                class="bi bi-hand-thumbs-up-fill text-success"
+                (click)="finalResponse(true)"
+                style="padding: 2rem"
+              ></i>
+
+              <i
+                matTooltip="Issue Not Resolved"
+                matTooltipPosition="left"
+                class="bi bi-hand-thumbs-down-fill text-danger"
+                (click)="finalResponse(false)"
+                style="padding: 2rem"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'Unable to Receive Calls - Mobile'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12" style="padding-right: 0px">
+            <h1 class="col pb-2 border-bottom fw-bold">
+              {{ troubleshootingOption }}
+            </h1>
+          </div>
+        </div>
+        <br />
+        <div class="row row-cols-1">
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Verify that you are subscribed to the service you are trying to
+              use (i.e. roaming plan, data plan)
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to make sure Flow supports the action being requested
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check Network Settings:
+              <ul class="list-group-item mb-3 col" style="padding-left: 4em">
+                <li>
+                  <b>Android</b> > network connections > mobile networks >
+                  network mode > options menu, change from LTE to 2G and back to
+                  LTE
+                </li>
+                <li>
+                  <b>Android</b> > network connections > mobile networks >
+                  network operators > manual scan > select name of network
+                </li>
+                <li>
+                  <b>iPhone</b> > settings > mobile data > network selection >
+                  select name of the network that you are on and connect from
+                  there `Check Message Center Number
+                </li>
+                <li>
+                  <b>Android</b> > Messages > message settings > text messages >
+                  message center number, should be +18768141109.
+                </li>
+                <li>
+                  <b>iPhone</b> > for 2G or 3G phone call customer care for
+                  assistance, if not go to store.
+                </li>
+              </ul>
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check your credit to make sure you have enough top up to make
+              calls/ access mobile data
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              If the issue persists, turn on airplane mode for 15 seconds, then
+              turn it back off.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Perform a device restart.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Remove SIM card from the device, wipe it with a dry cloth or
+              pencil eraser, then reinsert and try again.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to ensure you have Flow SIM card.
+            </li>
+          </ul>
+        </div>
+
+        <div class="py-3">
+          <div class="py-3" style="justify-content: center; display: flex">
+            <div>
+              <i
+                matTooltip="Issue Resolved"
+                matTooltipPosition="right"
+                class="bi bi-hand-thumbs-up-fill text-success"
+                (click)="finalResponse(true)"
+                style="padding: 2rem"
+              ></i>
+
+              <i
+                matTooltip="Issue Not Resolved"
+                matTooltipPosition="left"
+                class="bi bi-hand-thumbs-down-fill text-danger"
+                (click)="finalResponse(false)"
+                style="padding: 2rem"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="scrollTo"
+    *ngIf="troubleshootingOption == 'Credit Not Showing Up'"
+    [@slideInOut]="animationStateIssue"
+    class="container"
+  >
+    <div class="row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12" style="padding-right: 0px">
+            <h1 class="col pb-2 border-bottom fw-bold">
+              {{ troubleshootingOption }}
+            </h1>
+          </div>
+        </div>
+        <br />
+        <div class="row row-cols-1">
+          <ul class="list-groupd-flex animate__animated animate__fadeIn">
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Verify that you are subscribed to the service you are trying to
+              use (i.e. roaming plan, data plan)
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Make sure the mobile data feature on the device is turned on
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to make sure Flow supports the action being requested
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check Network Settings:
+              <ul class="list-group-item mb-3 col" style="padding-left: 4em">
+                <li>
+                  If an Android device – Go to mobile network > network mode >
+                  change from LTE to 3G, once credit appears change back to LTE
+                </li>
+                <li>If an iPhone – you should not experience this issue</li>
+              </ul>
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              If the issue persists, turn on airplane mode for 15 seconds, then
+              turn it back off.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Perform a device restart.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Remove SIM card from the device, wipe it with a dry cloth or
+              pencil eraser, then reinsert and try again.
+            </li>
+            <li
+              class="list-group-item mb-3 col resolution_list"
+              style="animation-delay: 2s"
+            >
+              Check to ensure you have Flow SIM card.
+            </li>
+          </ul>
+        </div>
+
+        <div class="py-3">
+          <div class="py-3" style="justify-content: center; display: flex">
+            <div>
+              <i
+                matTooltip="Issue Resolved"
+                matTooltipPosition="right"
+                class="bi bi-hand-thumbs-up-fill text-success"
+                (click)="finalResponse(true)"
+                style="padding: 2rem"
+              ></i>
+
+              <i
+                matTooltip="Issue Not Resolved"
+                matTooltipPosition="left"
+                class="bi bi-hand-thumbs-down-fill text-danger"
+                (click)="finalResponse(false)"
+                style="padding: 2rem"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="col-2 clear-icon" style="padding-left: 0px">
+          <mat-icon (click)="clearOption2()">highlight_off</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-2" id="scroller_bottom"></div>

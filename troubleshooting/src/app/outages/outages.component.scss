@@ -1,0 +1,112 @@
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 10000 !important;
+}
+.separator{
+  height: 1.8rem;
+}
+.mat-toolbar-row{
+  height: 64px !important;
+}
+.div-Slider-Media-Style{
+  max-height: 42vh !important;
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.outage-header{
+  background-color: #1B9BE4;
+  color: #fff;
+  text-wrap: nowrap !important;
+}
+.col {
+  color: #616161;
+}
+.theme-color {
+  color: #1B9BE4 !important;
+}
+mat-card-title{
+  font-family: sans-serif;
+}
+.outage-search:focus {
+  outline: 0 !important;
+  box-shadow: none;
+}
+.outage-search{
+  border: 0;
+}
+.mat-card {
+  border-radius: 0px !important;
+}
+.custom-card-content{
+  padding: 6px 16px 6px 16px !important;
+}
+.card-text{
+  padding-left: 10px;
+}
+.outage-items{
+  width: 100%;
+  height: 390px;
+  overflow: auto;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.main_div{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  //display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 25%;
+  //min-height: 80vh;
+  //Fixed floating position
+  position: absolute;
+  bottom:0;
+  left: 0;
+  //z-index: 9;
+  overflow-x: hidden;
+}
+.main_divMedia{
+  @extend .main_div;
+  width: 100% !important;
+}
+.container-2{
+  position: relative;
+}
+.container-2 .navigation{
+  position: relative;
+  height: 60px;//revert back for minimize effect
+  background: #fff;
+  overflow: hidden;
+  border-top-right-radius: .5em;
+  border-top-left-radius: .5em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
+
+.container-2 .navigation.active {
+  max-height: 85vh;
+  height: 520px;
+}
+
+//Breakpoint Media Query Slide
+.custom-slider.active {
+  //min-height: 50vh !important;
+  //height: 420px !important;
+  transition: 0.5s !important;
+}
+
+.toggle{
+  cursor: pointer;
+}
+.show_right_arrow, .show_left_arrow{
+  font-size: 24px;
+  font-weight: 900;
+}
+.show_right_arrow.active{
+  display: none;
+}
+.show_left_arrow.active{
+  display: none;
+}

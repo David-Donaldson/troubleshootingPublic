@@ -1,0 +1,118 @@
+<!--
+
+-->
+<div class="separator"></div>
+<app-google-map class="mappStyle"></app-google-map>
+
+<div class="main_div" [ngClass]="{ main_divMedia: divSliderMediaStyle }">
+  <div class="container-2">
+    <div
+      class="navigation"
+      [ngClass]="{ 'custom-slider': divSliderMediaStyle }"
+    >
+      <div class="outage-items-area">
+        <mat-card class="outage-header toggle" (click)="toggle($event)">
+          <div class="row">
+            <div class="col-9">
+              <mat-card-title class="float-start"
+                >Current Outages ({{
+                  (outageList$ | async)?.length
+                }})</mat-card-title
+              >
+            </div>
+            <div class="col-3">
+              <div>
+                <mat-icon
+                  class="show_right_arrow float-end pt-2"
+                  [ngClass]="{ active: isActive }"
+                  >expand_less</mat-icon
+                >
+                <mat-icon
+                  class="show_left_arrow float-end pt-2"
+                  [ngClass]="{ active: !isActive }"
+                  >expand_more</mat-icon
+                >
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <div class="input-group pt-3 col-md-4">
+          <input
+            class="form-control outage-search"
+            type="search"
+            [(ngModel)]="searchText"
+            placeholder="Search Outage Addresses"
+          />
+        </div>
+
+        <mat-divider class="pb-1"></mat-divider>
+        <div class="outage-items" *ngIf="outageList$ | async as allOutages">
+          <mat-card
+            class="pt-1 custom-card-content mat-elevation-z8"
+            *ngFor="
+              let single of allOutages | filter : searchText;
+              let i = index
+            "
+          >
+            <mat-card-content class="toggle">
+              <div
+                class="card-body p-1"
+                (click)="
+                  selectMarker(
+                    single.lat,
+                    single.lng,
+                    single.address,
+                    single.date
+                  )
+                "
+              >
+                <div class="row">
+                  <div class="col-9">
+                    <p class="h6 col card-title mb-1">
+                      {{ single.outageLocation }}
+                    </p>
+                  </div>
+                  <div class="col-3">
+                    <div
+                      class="card-text float-end theme-color text-muted fw-bold"
+                    >
+                      {{ i + 1 }}
+                    </div>
+                  </div>
+                </div>
+                <p class="card-text">
+                  <b>Affected Customers:</b> {{ single.affected }}
+                </p>
+                <p class="card-text"><b>Status:</b> {{ single.status }}</p>
+                <p class="card-text"><b>Address:</b> {{ single.address }}</p>
+
+                <div class="small">
+                  <div class="card-text text-muted fw-bold">
+                    Duration: {{ single.date }}
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card
+            class="mat-elevation-z8"
+            *ngIf="(allOutages | filter : searchText).length == 0"
+          >
+            <mat-card-content class="pt-1">
+              <div class="card-body p-1">
+                <p class="h6 col card-title mb-1">
+                  <b class="theme-color">No Results</b> Found
+                </p>
+                <p class="card-text mb-1">
+                  Please refine your search criteria and try again
+                </p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

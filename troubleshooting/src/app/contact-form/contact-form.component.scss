@@ -1,0 +1,26 @@
+.modal-header {
+  background-color: #1B9BE4;
+}
+
+#ArchivesModalLabel {
+  color: #fff !important;
+}
+
+.container {
+  overflow-x: hidden;
+  /* Hide horizontal scrollbar */
+  padding: 0px;
+}
+
+button {
+  background-color: #1B9BE4;
+  color: #fff;
+  border: none;
+}
+.mandatoryFields{
+  color: red;
+}
+
+.modal-content, .container{
+  border-radius: 0 !important;
+}

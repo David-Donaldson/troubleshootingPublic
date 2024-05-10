@@ -1,0 +1,17 @@
+<!--
+<google-map
+  #googleMap
+  id="map"
+  height="100%"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="moveMap($event)"
+  (mapMousemove)="move($event)">
+  <map-marker *ngFor="let markerPosition of markerPositions"
+  [position]="markerPosition"
+  [options]="markerOptions"
+  (mapClick)="markerActions($event, markerPosition)"></map-marker>
+</google-map>
+-->
+<div id="map" [ngClass]="{'div-Map-Media-Style': divMapMediaStyle}"></div>

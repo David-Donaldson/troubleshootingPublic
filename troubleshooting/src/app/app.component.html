@@ -1,0 +1,29 @@
+<div class="separator"></div>
+<div class="divider">
+  <div class="eaton mat-typography" style="overflow-x:hidden;" fxFlexFill cdkScrollable>
+    <mat-toolbar id="custom_toolbar" class="main-header mat-elevation-z4" [class.hidden]="toggleSearch">
+      <mat-toolbar-row style="padding: 0 5px;">
+        <div style="padding:8px 0 0 10px; flex:1;">
+          <div routerLink="" style="cursor: pointer;">
+            <div class="mat-headline-1" style="margin-bottom:2px; font-weight: 500;">FLOW</div>
+            <div class="mat-subheading-2 pb-1" style="line-height: .6rem;">Troubleshooting Tips & Tricks</div>
+          </div>
+        </div>
+        <button mat-icon-button class="custom_button" (click)="openSearch()">
+          <mat-icon ngbTooltip="Search" placement="bottom">search</mat-icon>
+        </button>
+        <button mat-icon-button class="custom_button" routerLink="/outages">
+                  <mat-icon ngbTooltip="Outages" placement="bottom">warning</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <app-troubleshooting-search></app-troubleshooting-search>
+  </div>
+</div>
+<div class="customRouter">
+  <router-outlet></router-outlet>
+</div>
+
+<ngx-spinner size="large" style="z-index: 999;" color="#1b9be4" [fullScreen]="true" type="ball-spin-clockwise">
+  <p style="color: #fff"> Please Wait... </p>
+</ngx-spinner>
